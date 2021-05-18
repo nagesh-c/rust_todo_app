@@ -1,8 +1,8 @@
-use std::env;
 use std::collections::HashMap;
+use std::env;
 use std::fs;
-use std::str::FromStr;
 use std::io::Read;
+use std::str::FromStr;
 
 // todo structure
 struct Todo {
@@ -13,7 +13,6 @@ struct Todo {
 // implements the methods for the structure
 // impl is specfic to the data type
 impl Todo {
-
     fn new() -> Result<Todo, std::io::Error> {
         // ?; is a shorthand for error handling
         // if there is any error will return immediately
@@ -43,7 +42,7 @@ impl Todo {
             map.insert(String::from(key), bool::from_str(val).unwrap());
         }
 
-        Ok(Todo{map})
+        Ok(Todo { map })
     }
 
     // self is borrowed here, because the string is
@@ -82,7 +81,7 @@ fn todo() {
     let action = env::args().nth(1).expect("Please specify an action");
     let item = env::args().nth(2).expect("Please specify an item");
     //println!("{:?} {:?} {:?}", action, item, env::args().len());
-    
+
     let mut todo = Todo::new().expect("Initialization of db failed.");
 
     if action == "add" {
@@ -97,7 +96,7 @@ fn todo() {
             Some(_) => match todo.save() {
                 Ok(_) => println!("todo updated for item {}", item),
                 Err(why) => println!("An error occurred: {}", why),
-            }
+            },
         }
     }
 }
